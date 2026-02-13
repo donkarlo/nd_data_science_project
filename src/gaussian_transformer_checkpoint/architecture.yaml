@@ -1,0 +1,8 @@
+dropout_rate: 0.1
+feed_forward_dimension: 128
+input_feature_count: 3
+maximum_time_steps: 2048
+model_dimension: 64
+number_of_attention_heads: 8
+output_feature_count: 3
+output_time_steps: 100

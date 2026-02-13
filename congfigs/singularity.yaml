@@ -1,8 +1,8 @@
 singularity:
   srs:
-    id: "srs" #single robot system
+    id: "srs" #single robotic system
   mrs:
-    id: "mrs" #multi robot system
+    id: "mrs" #multi robotic system
     architecture:
       - "leader_follower"
       - "swarm"
