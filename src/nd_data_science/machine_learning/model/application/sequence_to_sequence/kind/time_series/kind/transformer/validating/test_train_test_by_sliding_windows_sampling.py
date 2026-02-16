@@ -4,8 +4,8 @@ from nd_data_science.machine_learning.model.application.sequence_to_sequence.kin
     Predictor
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.training.training import \
     Config
-from nd_math.probability.statistic.population.sampling.sampler.sampler import Generator
-from nd_math.probability.statistic.population.sampling.sampler.sampler import SlidingWindow
+from nd_math.probability.statistic.population.sampling.sampling import Generator
+from nd_math.probability.statistic.population.sampling.sampling import SlidingWindow
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.validation.kind.train_test.train_test_sliding_window_sampling import \
     TrainTestBySlidingWindowSampling
 
@@ -39,9 +39,9 @@ class TestTrainTestByPointSampling:
             model_dimension=128,
             number_of_attention_heads=8,
             feed_forward_dimension=256,
-            input_feature_count=input_array.shape[2],
-            output_time_steps=sliding_window.get_output_length(),
-            output_feature_count=target_array.shape[2],
+            input_feature_dimension=input_array.shape[2],
+            output_sequence_size=sliding_window.get_output_length(),
+            output_feature_dimension=target_array.shape[2],
             maximum_time_steps=2048,
             dropout_rate=0.1,
         )

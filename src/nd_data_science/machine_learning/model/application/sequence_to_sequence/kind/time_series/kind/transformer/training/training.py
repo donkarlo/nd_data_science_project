@@ -20,15 +20,15 @@ class Training:
             raise ValueError("input_array and target_array must have shape (B, T, F).")
 
         if int(input_array.shape[1]) != int(self._architecture.get_output_time_steps()):
-            raise ValueError("This vanilla version assumes T_in == output_time_steps.")
+            raise ValueError("This vanilla version assumes T_in == output_sequence_size.")
 
-        if int(input_array.shape[2]) != int(self._architecture.get_input_feature_count()):
+        if int(input_array.shape[2]) != int(self._architecture.get_input_feature_dimension()):
             raise ValueError("Input feature count mismatch.")
 
         if int(target_array.shape[1]) != int(self._architecture.get_output_time_steps()):
             raise ValueError("Target time steps mismatch.")
 
-        if int(target_array.shape[2]) != int(self._architecture.get_output_feature_count()):
+        if int(target_array.shape[2]) != int(self._architecture.get_output_feature_dimension()):
             raise ValueError("Target feature count mismatch.")
 
         self._input_array = input_array.astype(np.float32, copy=False)

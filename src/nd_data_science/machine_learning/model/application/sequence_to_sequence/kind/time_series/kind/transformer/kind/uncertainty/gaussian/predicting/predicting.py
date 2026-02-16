@@ -1,4 +1,4 @@
-# file: nd_data_science/machine_learning/model/application/sequence_to_sequence/kind/time_series/kind/transformer/kind/uncertainty/gaussian/Predicting.py
+# file: nd_data_science/machine_learning/model/application/sequence_to_sequence/member/time_series/member/transformer/member/uncertainty/gaussian/Predicting.py
 from __future__ import annotations
 
 import numpy as np
@@ -24,8 +24,8 @@ class Predicting:
         self._learned_parameters = learned_parameters
 
         self._output_time_steps = int(self._architecture.get_output_time_steps())
-        self._input_feature_count = int(self._architecture.get_input_feature_count())
-        self._output_feature_count = int(self._architecture.get_output_feature_count())
+        self._input_feature_dimension = int(self._architecture.get_input_feature_dimension())
+        self._output_feature_dimension = int(self._architecture.get_output_feature_dimension())
 
         self._tf_model = self._architecture.build_tf_model()
         self._build_once_for_set_weights()
@@ -33,7 +33,7 @@ class Predicting:
 
     def _build_once_for_set_weights(self) -> None:
         dummy_batch_size = 1
-        dummy = tf.zeros((dummy_batch_size, self._output_time_steps, self._input_feature_count), dtype=tf.float32)
+        dummy = tf.zeros((dummy_batch_size, self._output_time_steps, self._input_feature_dimension), dtype=tf.float32)
         _ = self._tf_model(dummy, training=False)
 
     def _maybe_load_weights(self) -> None:
@@ -54,14 +54,14 @@ class Predicting:
 
         if int(input_array.shape[1]) != self._output_time_steps:
             raise ValueError("input_array time steps mismatch.")
-        if int(input_array.shape[2]) != self._input_feature_count:
+        if int(input_array.shape[2]) != self._input_feature_dimension:
             raise ValueError("input_array feature count mismatch.")
 
         x = tf.convert_to_tensor(input_array.astype(np.float32, copy=False), dtype=tf.float32)
         y = self._tf_model(x, training=False)
 
-        mu = y[..., :self._output_feature_count]
-        log_var = y[..., self._output_feature_count:]
+        mu = y[..., :self._output_feature_dimension]
+        log_var = y[..., self._output_feature_dimension:]
 
         var = tf.exp(log_var)
 

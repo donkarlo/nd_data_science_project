@@ -6,17 +6,24 @@ from nd_data_science.machine_learning.model.application.sequence_to_sequence.kin
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.kind.uncertainty.gaussian.training.config import Config as TrainingConfig
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.kind.uncertainty.gaussian.training.learned_parameter.learned_parameter import \
     LearnedParameter
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import \
+    SlidingWindow
+
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.generator import \
+    Generator as SlidingWindowGenerator
 
 
 class Training:
     """Train a Gaussian forecaster: predicts (mean, log_var) and trains with Gaussian NLL (diagonal)."""
 
-    def __init__(self, architecture: GaussianArchitecture, config: TrainingConfig, input_target_pairs: np.ndarray):
+    def __init__(self, architecture: GaussianArchitecture, config: TrainingConfig, training_sequence: np.ndarray):
         self._architecture = architecture
         self._config = config
+        self._training_sequence = training_sequence
+        self._generate_input_traget_sequence_pairs()
 
-        input_array = input_target_pairs[:, 0]
-        target_array = input_target_pairs[:, 1]
+        input_array = self._training_input_target_sequence_pairs[:, 0]
+        target_array = self._training_input_target_sequence_pairs[:, 1]
 
         if not isinstance(input_array, np.ndarray) or not isinstance(target_array, np.ndarray):
             raise TypeError("input_array and target_array must be np.ndarray.")
@@ -24,11 +31,11 @@ class Training:
             raise ValueError("input_array and target_array must have shape (B, T, F).")
 
         output_time_steps = int(self._architecture.get_output_time_steps())
-        input_feature_count = int(self._architecture.get_input_feature_count())
-        output_feature_count = int(self._architecture.get_output_feature_count())
+        input_feature_count = int(self._architecture.get_input_feature_dimension())
+        output_feature_count = int(self._architecture.get_output_feature_dimension())
 
         if int(input_array.shape[1]) != output_time_steps:
-            raise ValueError("This vanilla version assumes T_in == output_time_steps.")
+            raise ValueError("This vanilla version assumes T_in == output_sequence_size.")
         if int(input_array.shape[2]) != input_feature_count:
             raise ValueError("Input feature count mismatch.")
         if int(target_array.shape[1]) != output_time_steps:
@@ -44,8 +51,18 @@ class Training:
 
         self._train_once()
 
+    def _generate_input_traget_sequence_pairs(self):
+        sliding_window = SlidingWindow(self._config.get_config_dic()["input_sequence_size"],
+                                       self._config.get_config_dic()["output_sequence_size"],
+                                       self._config.get_config_dic()["sequence_overlap_size"])
+
+        # generating sliding window
+        self._training_input_target_sequence_pairs = SlidingWindowGenerator(self._training_sequence,
+                                                                      sliding_window).get_input_output_pairs()
+
+
     def _gaussian_nll(self, y_true: tf.Tensor, y_pred: tf.Tensor) -> tf.Tensor:
-        output_feature_count = int(self._architecture.get_output_feature_count())
+        output_feature_count = int(self._architecture.get_output_feature_dimension())
 
         mu = y_pred[..., :output_feature_count]
         log_var = y_pred[..., output_feature_count:]

@@ -8,11 +8,11 @@ from nd_data_science.machine_learning.model.application.sequence_to_sequence.kin
 
 
 class Storage:
-    """Save/load LearnedParameter as NPZ."""
+    """Save/load LearnedParameters as NPZ."""
 
     def save(self, learned_parameter: LearnedParameter, file_path: Path) -> None:
         if not isinstance(learned_parameter, LearnedParameter):
-            raise TypeError("learned_parameter must be LearnedParameter.")
+            raise TypeError("learned_parameters must be LearnedParameters.")
         if not isinstance(file_path, Path):
             raise TypeError("file_path must be Path.")
 

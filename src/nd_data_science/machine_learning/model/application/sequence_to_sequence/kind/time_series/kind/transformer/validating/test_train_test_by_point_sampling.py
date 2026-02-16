@@ -35,9 +35,9 @@ class TestTrainTestByPointSampling:
             model_dimension=128,
             number_of_attention_heads=8,
             feed_forward_dimension=256,
-            input_feature_count=3,
-            output_time_steps=100,
-            output_feature_count=3,
+            input_feature_dimension=3,
+            output_sequence_size=100,
+            output_feature_dimension=3,
             maximum_time_steps=2048,
             dropout_rate=0.1,
         )

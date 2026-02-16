@@ -6,6 +6,7 @@ from tensorflow.keras import layers as TfLayers
 
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.architecture.architecture import \
     Architecture as BaseTransformerModelArchitecture
+from nd_utility.data.kind.dic.dic import Dic
 
 
 class Architecture(BaseTransformerModelArchitecture):
@@ -18,13 +19,29 @@ class Architecture(BaseTransformerModelArchitecture):
             second F_out: log_var (diagonal, log-space)
     """
 
+    @classmethod
+    def from_dict(cls, payload: Dic) -> "Architecture":
+        if not isinstance(payload, dict):
+            raise TypeError("payload must be a dict.")
+
+        return cls(
+            model_dimension=int(payload["model_dimension"]),
+            number_of_attention_heads=int(payload["number_of_attention_heads"]),
+            feed_forward_dimension=int(payload["feed_forward_dimension"]),
+            input_feature_dimension=int(payload["feature_dimension"]),
+            output_sequence_size=int(payload["output_sequence_size"]),
+            output_feature_dimension=int(payload["feature_dimension"]),
+            maximum_time_steps=int(payload["maximum_time_steps"]),
+            dropout_rate=float(payload["dropout_rate"]),
+        )
+
     def build_tf_model(self) -> TfModel:
         model_dimension = int(self.get_model_dimension())
         number_of_attention_heads = int(self.get_number_of_attention_heads())
         feed_forward_dimension = int(self.get_feed_forward_dimension())
-        input_feature_count = int(self.get_input_feature_count())
-        output_time_steps = int(self.get_output_time_steps())
-        output_feature_count = int(self.get_output_feature_count())
+        input_feature_count = int(self.get_input_feature_dimension())
+        output_sequence_size = int(self.get_output_time_steps())
+        output_feature_count = int(self.get_output_feature_dimension())
         maximum_time_steps = int(self.get_maximum_time_steps())
         dropout_rate = float(self.get_dropout_rate())
 
@@ -33,7 +50,7 @@ class Architecture(BaseTransformerModelArchitecture):
 
         key_dimension = model_dimension // number_of_attention_heads
 
-        x_in = TfLayers.Input(shape=(output_time_steps, input_feature_count), dtype=tf.float32, name="x_in")
+        x_in = TfLayers.Input(shape=(output_sequence_size, input_feature_count), dtype=tf.float32, name="x_in")
         x = TfLayers.Dense(model_dimension, name="in_proj")(x_in)
 
         position_embedding = TfLayers.Embedding(maximum_time_steps, model_dimension, name="pos_emb")
@@ -74,25 +91,11 @@ class Architecture(BaseTransformerModelArchitecture):
             "model_dimension": int(self.get_model_dimension()),
             "number_of_attention_heads": int(self.get_number_of_attention_heads()),
             "feed_forward_dimension": int(self.get_feed_forward_dimension()),
-            "input_feature_count": int(self.get_input_feature_count()),
-            "output_time_steps": int(self.get_output_time_steps()),
-            "output_feature_count": int(self.get_output_feature_count()),
+            "input_feature_dimension": int(self.get_input_feature_dimension()),
+            "output_sequence_size": int(self.get_output_time_steps()),
+            "output_feature_dimension": int(self.get_output_feature_dimension()),
             "maximum_time_steps": int(self.get_maximum_time_steps()),
             "dropout_rate": float(self.get_dropout_rate()),
         }
 
-    @classmethod
-    def from_dict(cls, payload: Dict[str, Any]) -> "Architecture":
-        if not isinstance(payload, dict):
-            raise TypeError("payload must be a dict.")
 
-        return cls(
-            model_dimension=int(payload["model_dimension"]),
-            number_of_attention_heads=int(payload["number_of_attention_heads"]),
-            feed_forward_dimension=int(payload["feed_forward_dimension"]),
-            input_feature_count=int(payload["input_feature_count"]),
-            output_time_steps=int(payload["output_time_steps"]),
-            output_feature_count=int(payload["output_feature_count"]),
-            maximum_time_steps=int(payload["maximum_time_steps"]),
-            dropout_rate=float(payload["dropout_rate"]),
-        )

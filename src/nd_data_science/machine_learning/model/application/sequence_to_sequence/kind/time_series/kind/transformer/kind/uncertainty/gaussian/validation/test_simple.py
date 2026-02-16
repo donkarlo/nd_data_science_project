@@ -3,7 +3,7 @@ from nd_data_science.machine_learning.model.application.sequence_to_sequence.kin
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.kind.uncertainty.gaussian.prediction.predictor import \
     Predictor
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.kind.uncertainty.gaussian.training.config import Config
-from nd_math.probability.statistic.population.sampling.sampler.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import \
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import \
     SlidingWindow
 from robotic_nd.robot.structure.kind.mind.process.kind.memory.action.kind.intra.binary.segregation.segregator.kind.trace_group import \
     TraceGroup as NormalGpsTraceGroup300k
@@ -22,9 +22,9 @@ architecture = Architecture(
     model_dimension=64,
     number_of_attention_heads=8,
     feed_forward_dimension=128,
-    input_feature_count=feature_dimension,
-    output_time_steps=sliding_window.get_output_length(),
-    output_feature_count=feature_dimension,
+    input_feature_dimension=feature_dimension,
+    output_sequence_size=sliding_window.get_output_length(),
+    output_feature_dimension=feature_dimension,
     maximum_time_steps=2048,
     dropout_rate=0.1,
 )

@@ -13,7 +13,7 @@ class Predictor:
 
         self._tf_model = self._architecture.build_tf_model()
 
-        dummy = tf.zeros((1, self._architecture.get_output_time_steps(), self._architecture.get_input_feature_count()),
+        dummy = tf.zeros((1, self._architecture.get_output_time_steps(), self._architecture.get_input_feature_dimension()),
                          dtype=tf.float32)
         _ = self._tf_model(dummy, training=False)
 
@@ -34,7 +34,7 @@ class Predictor:
             raise ValueError("input_array must have shape (B, T, F).")
 
         if int(input_array.shape[1]) != int(self._architecture.get_output_time_steps()):
-            raise ValueError("This vanilla version assumes T_in == output_time_steps.")
+            raise ValueError("This vanilla version assumes T_in == output_sequence_size.")
 
         out = self._tf_model(input_array.astype(np.float32, copy=False), training=False)
         return out.numpy()

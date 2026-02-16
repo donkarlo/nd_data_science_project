@@ -1,4 +1,4 @@
-# file: nd_data_science/machine_learning/model/application/sequence_to_sequence/kind/time_series/kind/transformer/training/learned_parameter.py
+# file: nd_data_science/machine_learning/model/application/sequence_to_sequence/member/time_series/member/transformer/training/learned_parameters.py
 from __future__ import annotations
 
 from typing import List, Optional, Dict, Any
@@ -30,7 +30,7 @@ class LearnedParameter:
         return payload
 
     @classmethod
-    def from_npz(cls, payload: Dict[str, Any]) -> "LearnedParameter":
+    def from_npz(cls, payload: Dict[str, Any]) -> "LearnedParameters":
         if not isinstance(payload, dict):
             raise TypeError("payload must be a dict.")
         if "count" not in payload:

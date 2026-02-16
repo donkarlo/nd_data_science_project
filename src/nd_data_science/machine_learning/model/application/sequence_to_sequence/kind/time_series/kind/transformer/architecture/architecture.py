@@ -8,23 +8,23 @@ class Architecture:
             model_dimension: int,
             number_of_attention_heads: int,
             feed_forward_dimension: int,
-            input_feature_count: int,
-            output_time_steps: int,
-            output_feature_count: int,
+            input_feature_dimension: int,# 3 for GPS, it is not the input or output sequence length
+            output_sequence_size: int,
+            output_feature_dimension: int,
             maximum_time_steps: int = 2048,
             dropout_rate: float = 0.1,
     ):
         self._model_dimension = int(model_dimension)
         self._number_of_attention_heads = int(number_of_attention_heads)
         self._feed_forward_dimension = int(feed_forward_dimension)
-        self._input_feature_count = int(input_feature_count)
-        self._output_time_steps = int(output_time_steps)
-        self._output_feature_count = int(output_feature_count)
+        self._input_feature_dimension = int(input_feature_dimension)
+        self._output_time_steps = int(output_sequence_size)
+        self._output_feature_dimension = int(output_feature_dimension)
         self._maximum_time_steps = int(maximum_time_steps)
         self._dropout_rate = float(dropout_rate)
 
-        if self._input_feature_count <= 0:
-            raise ValueError("input_feature_count must be > 0.")
+        if self._input_feature_dimension <= 0:
+            raise ValueError("input_feature_dimension must be > 0.")
         if self._model_dimension <= 0:
             raise ValueError("model_dimension must be > 0.")
         if self._number_of_attention_heads <= 0:
@@ -32,9 +32,9 @@ class Architecture:
         if self._feed_forward_dimension <= 0:
             raise ValueError("feed_forward_dimension must be > 0.")
         if self._output_time_steps <= 0:
-            raise ValueError("output_time_steps must be > 0.")
-        if self._output_feature_count <= 0:
-            raise ValueError("output_feature_count must be > 0.")
+            raise ValueError("output_sequence_size must be > 0.")
+        if self._output_feature_dimension <= 0:
+            raise ValueError("output_feature_dimension must be > 0.")
         if self._maximum_time_steps <= 0:
             raise ValueError("maximum_time_steps must be > 0.")
         if self._model_dimension % self._number_of_attention_heads != 0:
@@ -51,14 +51,14 @@ class Architecture:
     def get_feed_forward_dimension(self) -> int:
         return self._feed_forward_dimension
 
-    def get_input_feature_count(self) -> int:
-        return self._input_feature_count
+    def get_input_feature_dimension(self) -> int:
+        return self._input_feature_dimension
 
     def get_output_time_steps(self) -> int:
         return self._output_time_steps
 
-    def get_output_feature_count(self) -> int:
-        return self._output_feature_count
+    def get_output_feature_dimension(self) -> int:
+        return self._output_feature_dimension
 
     def get_maximum_time_steps(self) -> int:
         return self._maximum_time_steps
@@ -71,8 +71,8 @@ class Architecture:
         d_model = self._model_dimension
         heads = self._number_of_attention_heads
         ff_dim = self._feed_forward_dimension
-        f_in = self._input_feature_count
-        f_out = self._output_feature_count
+        f_in = self._input_feature_dimension
+        f_out = self._output_feature_dimension
         t_out = self._output_time_steps
         max_steps = self._maximum_time_steps
         dropout_rate = self._dropout_rate

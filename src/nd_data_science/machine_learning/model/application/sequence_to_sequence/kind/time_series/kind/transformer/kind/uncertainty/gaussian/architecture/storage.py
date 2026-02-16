@@ -1,4 +1,4 @@
-# file: nd_data_science/machine_learning/model/application/sequence_to_sequence/kind/time_series/kind/transformer/kind/uncertainty/gaussian/architecture_yaml_repository.py
+# file: nd_data_science/machine_learning/model/application/sequence_to_sequence/member/time_series/member/transformer/member/uncertainty/gaussian/architecture_yaml_repository.py
 from __future__ import annotations
 
 from pathlib import Path

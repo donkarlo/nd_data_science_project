@@ -1,15 +1,15 @@
 import numpy as np
 
-from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.kind.uncertainty.gaussian.prediction.predictor import \
-    Predictor
+from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.kind.uncertainty.gaussian.predicting.predicting import \
+    Predicting
 from nd_math.view.kind.point_cloud.decorator.lined.ordered_intra_line_connected import OrderedIntraLineConnected
 from nd_data_science.machine_learning.model.validation.validation import Validation
 from nd_math.view.kind.point_cloud.point_cloud import PointCloud
-from nd_math.view.kind.point_cloud.point.group.group import Group
+from nd_math.view.kind.point_cloud.point.group.group import Group as PointGroupCloudPlotView
 
 
 class TrainTestByPeriods(Validation):
-    def __init__(self, predictor:Predictor, train_data, test_data):
+    def __init__(self, predictor:Predicting, train_data, test_data):
         self._test_predicted_distribution_mean: np.ndarray | None = None
         self._test_set_target_values: np.ndarray | None = None
         self._predictor = predictor
@@ -29,9 +29,7 @@ class TrainTestByPeriods(Validation):
 
 
 
-    def render_euclidean_distance(self):
-        print("pred:", self._test_predicted_distribution_mean.shape, self._test_predicted_distribution_mean.dtype)
-        print("tgt:", self._test_set_targets.shape, self._test_set_targets.dtype)
+    def render_euclidean_distance(self)->None:
 
         residuals = self._test_predicted_distribution_mean - self._test_set_targets
         residuals = np.linalg.norm(residuals, axis=-1)
@@ -41,6 +39,6 @@ class TrainTestByPeriods(Validation):
         indices = np.arange(1, len(residuals) + 1)
         two_dimensional = np.column_stack((indices, residuals))
 
-        pair_set = Group(two_dimensional)
-        point_cloud = OrderedIntraLineConnected(PointCloud(pair_set))
+        point_group = PointGroupCloudPlotView(two_dimensional)
+        point_cloud = OrderedIntraLineConnected(PointCloud(point_group))
         point_cloud.render()

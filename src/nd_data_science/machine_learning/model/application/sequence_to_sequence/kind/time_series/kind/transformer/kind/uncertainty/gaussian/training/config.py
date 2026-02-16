@@ -1,12 +1,13 @@
 from typing import Dict, Any
-from nd_math.probability.statistic.population.sampling.sampler.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import \
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import \
     SlidingWindow
+from nd_utility.data.kind.dic.dic import Dic
 
 
 class Config:
     def __init__(
             self,
-            training_sequence_size: int,
+            training_sequence_size: int,#the length of the whole sequence without Sliding window etc, just the raw training length
             input_sequence_size: int,
             output_sequence_size: int,
             sequence_overlap_size: int,
@@ -31,6 +32,22 @@ class Config:
         if self._learning_rate <= 0.0:
             raise ValueError("learning_rate must be > 0.")
 
+    @classmethod
+    def from_dict(cls, payload: Dic) -> "Config":
+        if not isinstance(payload, dict):
+            raise TypeError("payload must be a dict.")
+
+        return cls(
+            training_sequence_size=int(payload["training_sequence_size"]),
+            input_sequence_size=int(payload["input_sequence_size"]),
+            output_sequence_size=int(payload["output_sequence_size"]),
+            sequence_overlap_size=int(payload["sequence_overlap_size"]),
+            epochs=int(payload["epochs"]),
+            batch_size=int(payload["batch_size"]),
+            learning_rate=float(payload["learning_rate"]),
+            shuffle=bool(payload["shuffle"]),
+        )
+
     def get_epochs(self) -> int:
         return self._epochs
 
@@ -53,19 +70,3 @@ class Config:
 
     def get_sliding_window(self) -> SlidingWindow:
         return SlidingWindow(self._input_sequence_size, self._output_sequence_size, self._sequence_overlap_size)
-
-    @classmethod
-    def from_dict(cls, payload: Dict[str, Any]) -> "Config":
-        if not isinstance(payload, dict):
-            raise TypeError("payload must be a dict.")
-
-        return cls(
-            training_sequence_size=int(payload["training_sequence_size"]),
-            input_sequence_size=int(payload["input_sequence_size"]),
-            output_sequence_size=int(payload["output_sequence_size"]),
-            sequence_overlap_size=int(payload["sequence_overlap_size"]),
-            epochs=int(payload["epochs"]),
-            batch_size=int(payload["batch_size"]),
-            learning_rate=float(payload["learning_rate"]),
-            shuffle=bool(payload["shuffle"]),
-        )

@@ -4,9 +4,9 @@ from nd_data_science.machine_learning.model.application.sequence_to_sequence.pre
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.trainer.trainer import Trainer
 from nd_data_science.machine_learning.model.architecture.architecture import Architecture
 from nd_data_science.machine_learning.model.supervision.kind.supervion_dependent.training.config import Config
-from nd_math.probability.statistic.population.sampling.sampler.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.generator import \
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.generator import \
     Generator as SlidingWindowGenerator
-from nd_math.probability.statistic.population.sampling.sampler.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import SlidingWindow
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import SlidingWindow
 from nd_math.view.kind.point_cloud.decorator.lined.ordered_intra_line_connected import OrderedIntraLineConnected
 from nd_data_science.machine_learning.model.validation.validation import Validation
 from nd_math.view.kind.point_cloud.point_cloud import PointCloud

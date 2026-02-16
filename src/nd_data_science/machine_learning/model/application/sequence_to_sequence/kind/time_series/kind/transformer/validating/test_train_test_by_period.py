@@ -10,7 +10,7 @@ from nd_data_science.machine_learning.model.application.sequence_to_sequence.kin
     Config
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.validation.kind.train_test.train_test_by_periods import \
     TrainTestByPeriods
-from nd_math.probability.statistic.population.sampling.sampler.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import SlidingWindow
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import SlidingWindow
 from nd_utility.data.storage.kind.file.numpi.multi_valued import MultiValued as NpMultiValued
 from nd_utility.os.file_system.file.file import File as OsFile
 from nd_utility.os.file_system.path.file import File as FilePath
@@ -19,7 +19,7 @@ from nd_utility.os.file_system.path.file import File as FilePath
 class TestTrainTestByPeriodSampling:
     def test_plot_mean_euclidean_distance_plot(self):
         file_path = FilePath(
-            "/nd_sociomind/experiment/kind/oldest/robotic/uav1/structure/mind/memory/explicit/long_term/episodic/normal/gaussianed_quaternion_kinematic/time_position/time_position.npz"
+            "/nd_sociomind/experiment/member/oldest/robotic/uav1/grouping/mind/memory/explicit/long_term/episodic/normal/gaussianed_quaternion_kinematic/time_position/time_position.npz"
         )
         os_file = OsFile.init_from_path(file_path)
         storage = NpMultiValued(os_file, False)
@@ -56,9 +56,9 @@ class TestTrainTestByPeriodSampling:
             model_dimension=64,
             number_of_attention_heads=8,
             feed_forward_dimension=128,
-            input_feature_count=feature_dimension,  # GPS without time has 3 dimensions
-            output_time_steps=sliding_window.get_input_length(),  # the length of each sliding window as the Predicting length
-            output_feature_count=feature_dimension,  # we want 3d GPS predictions
+            input_feature_dimension=feature_dimension,  # GPS without time has 3 dimensions
+            output_sequence_size=sliding_window.get_input_length(),  # the length of each sliding window as the Predicting length
+            output_feature_dimension=feature_dimension,  # we want 3d GPS predictions
             maximum_time_steps=2048,
             dropout_rate=0.1,
         )
@@ -72,5 +72,5 @@ class TestTrainTestByPeriodSampling:
 
         train_test = TrainTestByPeriods.init_from_one_split(training_partitions, testing_partition,
                                                             Config, architecture, trainer_config, Predictor,
-                                                            sliding_window.get_step())
+                                                            sliding_window.get_overlap_size())
         train_test.render_euclidean_distance()

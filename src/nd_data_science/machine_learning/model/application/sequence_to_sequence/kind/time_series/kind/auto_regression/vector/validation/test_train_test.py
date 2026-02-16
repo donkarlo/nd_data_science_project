@@ -7,9 +7,9 @@ from nd_data_science.machine_learning.model.application.sequence_to_sequence.kin
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.auto_regression.vector.predictor import \
     Predictor
 from nd_data_science.machine_learning.model.application.sequence_to_sequence.validation.kind.train_test.train_test_sliding_window_sampling import TrainTestBySlidingWindowSampling
-from nd_math.probability.statistic.population.sampling.sampler.sampler import \
+from nd_math.probability.statistic.population.sampling.sampling import \
     Generator
-from nd_math.probability.statistic.population.sampling.sampler.sampler import \
+from nd_math.probability.statistic.population.sampling.sampling import \
     SlidingWindow
 from nd_math.number.kind.real.interval.unit.open_unit_interval import OpenUnitInterval
 from nd_math.probability.statistic.population.kind.countable.finite.member_mentioned.numbered.numbered import Numbered as NumpiedPopulation

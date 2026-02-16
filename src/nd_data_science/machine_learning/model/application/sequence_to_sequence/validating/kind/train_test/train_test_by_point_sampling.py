@@ -5,12 +5,12 @@ from nd_data_science.machine_learning.model.application.sequence_to_sequence.tra
 from nd_data_science.machine_learning.model.architecture.architecture import Architecture
 from nd_data_science.machine_learning.model.supervision.kind.supervion_dependent.training.config import Config
 from nd_math.number.kind.real.interval.unit.close_unit_interval_number import CloseUnitIntervalNumber
-from nd_math.probability.statistic.population.sampling.sampler.kind.countable.finite.members_mentioned.numbered.random.random import \
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.random.random import \
     Random
-from nd_math.probability.statistic.population.sampling.sampler.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.generator import \
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.generator import \
     Generator as SlidingWindowGenerator
-from nd_math.probability.statistic.population.sampling.sampler.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import SlidingWindow
-from nd_math.probability.statistic.population.sampling.sampler.size.kind.ratio import Ratio
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import SlidingWindow
+from nd_math.probability.statistic.population.sampling.size.kind.ratio import Ratio
 from nd_math.view.kind.point_cloud.decorator.lined.ordered_intra_line_connected import OrderedIntraLineConnected
 from nd_data_science.machine_learning.model.validation.validation import Validation
 from nd_math.probability.statistic.population.kind.countable.finite.member_mentioned.numbered.numbered import Numbered as NumberedPopulation
