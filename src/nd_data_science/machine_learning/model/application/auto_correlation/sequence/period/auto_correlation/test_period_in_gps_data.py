@@ -9,7 +9,7 @@ from nd_utility.os.file_system.path.file import File as FilePath
 class TestPeriodInGpsData:
     def setup_method(self):
         file_path = FilePath(
-            "/home/donkarlo/Dropbox/repo/robotic_lab_project/data/experiment/member/oldest/robotic/robotic/uav1/grouping/member/mind/memory/explicit/long_term/episodic/normal/gaussianed_quaternion_kinematic/time_position/time_position.npz"
+            "/home/donkarlo/Dropbox/repo/robotic_lab_project/data/experiment/member/oldest/robotic_group/robotic_group/uav1/grouping/member/mind/memory/explicit/long_term/episodic/normal/gaussianed_quaternion_kinematic/time_position/time_position.npz"
         )
         os_file = OsFile.init_from_path(file_path)
         storage = NpMultiValued(os_file, False)

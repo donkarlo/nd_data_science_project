@@ -3,7 +3,7 @@ from typing import Any
 
 class Data:
     """
-    Here robotic is only numerical numpy array so it is different than robotic in nd_utility.robotic
+    Here robotic_group is only numerical numpy array so it is different than robotic_group in nd_utility.robotic_group
     """
     def __init__(self, data:Any):
         self._np_array = None

@@ -17,7 +17,7 @@ class Pca:
     def __init__(self) -> None:
         # ----- Load LiDAR scans from pickle -----
         path = Path(
-            "/robotic/experiements/oldest/robots/uav1/mind/memory/long_term/explicit/episodic/normal/lidar/lidar.pkl"
+            "/robotic_group/experiements/oldest/robots/uav1/mind/memory/long_term/explicit/episodic/normal/lidar/lidar.pkl"
         )
 
         os_file = File.init_from_path(path)
@@ -36,7 +36,7 @@ class Pca:
 
         scan_vecs = np.array(scan_vecs, dtype=np.float64)
 
-        # ----- Clean LiDAR robotic -----
+        # ----- Clean LiDAR robotic_group -----
         # RPLidar A2 maximum usable range is about 14 m, we keep 15.0 as a safe clipping bound.
         max_range = 15.0
 

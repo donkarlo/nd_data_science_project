@@ -8,11 +8,11 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
 
 class Pca:
     """
-    Tries to preserve teh variance of the whole robotic
+    Tries to preserve teh variance of the whole robotic_group
     """
     def __init__(self):
         path = Path(
-            "/robotic/experiements/oldest/robots/uav1/mind/memory/long_term/explicit/episodic/normal/lidar/lidar.pkl")
+            "/robotic_group/experiements/oldest/robots/uav1/mind/memory/long_term/explicit/episodic/normal/lidar/lidar.pkl")
 
         os_file = File.init_from_path(path)
         pickle = Pkl(os_file, False)
@@ -30,7 +30,7 @@ class Pca:
 
         scan_vecs = np.array(scan_vecs, dtype=np.float64)
 
-        # ----- Clean LiDAR robotic -----
+        # ----- Clean LiDAR robotic_group -----
         max_range = 15.0
 
         # Replace inf / -inf / NaN with max_range

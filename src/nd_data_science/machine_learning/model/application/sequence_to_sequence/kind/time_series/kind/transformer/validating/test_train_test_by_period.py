@@ -19,7 +19,7 @@ from nd_utility.os.file_system.path.file import File as FilePath
 class TestTrainTestByPeriodSampling:
     def test_plot_mean_euclidean_distance_plot(self):
         file_path = FilePath(
-            "/nd_sociomind/experiment/member/oldest/robotic/uav1/grouping/mind/memory/explicit/long_term/episodic/normal/gaussianed_quaternion_kinematic/time_position/time_position.npz"
+            "/nd_sociomind/experiment/member/oldest/robotic_group/uav1/grouping/mind/memory/explicit/long_term/episodic/normal/gaussianed_quaternion_kinematic/time_position/time_position.npz"
         )
         os_file = OsFile.init_from_path(file_path)
         storage = NpMultiValued(os_file, False)

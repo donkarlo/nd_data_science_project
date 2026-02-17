@@ -1,6 +1,6 @@
 class Model:
     """
-    - Can be robotic derived which can be trainable
+    - Can be robotic_group derived which can be trainable
     - can be like physics rules
     - can be like bayesian inference
     """

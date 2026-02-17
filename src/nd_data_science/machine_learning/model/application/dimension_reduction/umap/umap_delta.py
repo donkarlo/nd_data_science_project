@@ -25,7 +25,7 @@ class UmapDelta:
 
     def __init__(self) -> None:
         path = Path(
-            "/robotic/experiements/oldest/robots/uav1/mind/memory/long_term/explicit/episodic/normal/lidar/lidar.pkl"
+            "/robotic_group/experiements/oldest/robots/uav1/mind/memory/long_term/explicit/episodic/normal/lidar/lidar.pkl"
         )
 
         os_file = File.init_from_path(path)
