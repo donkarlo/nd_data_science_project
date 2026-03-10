@@ -17,9 +17,9 @@ from nd_math.probability.statistic.population.sampling.kind.countable.finite.mem
     SlidingWindow
 from nd_math.probability.statistic.population.sampling.size.kind.ratio import Ratio
 from nd_math.sequence.partitioning.kind.by_length.by_length import ByLength as ByLengthSequencePartitioning
-from nd_robotic.robot.structure.kind.mind.cognition.process.kind.memory.kind.implicit.repetition_priming.kind.event_specific_knowledge_forcasting_model_config.architecture import \
+from nd_robotic_ai.robot.structure.kind.mind.cognition.process.kind.memory.kind.implicit.repetition_priming.kind.event_specific_knowledge_forcasting_model_config.architecture import \
     Architecture as RepititionPrimingArchitecture
-from nd_robotic.robot.structure.kind.mind.cognition.process.kind.memory.kind.implicit.repetition_priming.kind.event_specific_knowledge_forcasting_model_config.training.config import \
+from nd_robotic_ai.robot.structure.kind.mind.cognition.process.kind.memory.kind.implicit.repetition_priming.kind.event_specific_knowledge_forcasting_model_config.training.config import \
     Config as RepititionPrimingTrainingConfig
 from nd_sociomind.experiment.kind.oldest.robotic.composite.children.composite.children.uav1.structure.kind.mind.memory.explicit.long_term.episodic.auto_biographical.event_specific_knowledge.normal.sliced_from_1_to_300000.gaussianed_quaternion_kinematic.time_position.time_positions import \
     TimePositions
