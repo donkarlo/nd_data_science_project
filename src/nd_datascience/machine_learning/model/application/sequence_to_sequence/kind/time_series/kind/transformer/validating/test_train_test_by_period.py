@@ -2,15 +2,16 @@ import numpy as np
 
 from nd_datascience.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.architecture.architecture import \
     Architecture
-from nd_datascience.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.prediction.predictor import \
-    Predictor
 from nd_datascience.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.kinds.uncertainty.gaussian.training.config import \
     Config as TrainerConfig
+from nd_datascience.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.predicting.predicting import \
+    Predictor
 from nd_datascience.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.training.training import \
     Config
-from nd_datascience.machine_learning.model.application.sequence_to_sequence.validation.kind.train_test.train_test_by_periods import \
+from nd_datascience.machine_learning.model.application.sequence_to_sequence.validating.kind.train_test.train_test_by_periods import \
     TrainTestByPeriods
-from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import SlidingWindow
+from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.sliding_window import \
+    SlidingWindow
 from nd_utility.data.storage.kind.file.numpi.multi_valued import MultiValued as NpMultiValued
 from nd_utility.os.file_system.file.file import File as OsFile
 from nd_utility.os.file_system.path.file import File as FilePath
@@ -19,7 +20,7 @@ from nd_utility.os.file_system.path.file import File as FilePath
 class TestTrainTestByPeriodSampling:
     def test_plot_mean_euclidean_distance_plot(self):
         file_path = FilePath(
-            "/nd_sociomind/experiment/members/oldest/robotic_group/uav1/grouping/mind/memory/explicit/long_term/episodic/normal/gaussianed_quaternion_kinematic/time_position/time_position.npz"
+            "/home/donkarlo/Dropbox/repo/nd_sociomind_project/src/nd_sociomind/experiment/parts/oldest/uav1_normal_300k_time_positions_modality.npz"
         )
         os_file = OsFile.init_from_path(file_path)
         storage = NpMultiValued(os_file, False)
@@ -38,7 +39,8 @@ class TestTrainTestByPeriodSampling:
         print(partitioned_population[0].shape)
         training_partitions = np.vstack(
             [partitioned_population[0], partitioned_population[1], partitioned_population[2], partitioned_population[3],
-             partitioned_population[4], partitioned_population[5], partitioned_population[6], partitioned_population[7]])
+             partitioned_population[4], partitioned_population[5], partitioned_population[6],
+             partitioned_population[7]])
         testing_partition = np.vstack([partitioned_population[8], partitioned_population[9]])
 
         print("ram.shape:", ram.shape, "ram.nbytes(MB):", ram.nbytes / 1024 / 1024)
@@ -57,7 +59,8 @@ class TestTrainTestByPeriodSampling:
             number_of_attention_heads=8,
             feed_forward_dimension=128,
             input_feature_dimension=feature_dimension,  # GPS without time has 3 dimensions
-            output_sequence_size=sliding_window.get_input_length(),  # the length of each sliding window as the Predicting length
+            output_sequence_size=sliding_window.get_input_length(),
+            # the length of each sliding window as the Predicting length
             output_feature_dimension=feature_dimension,  # we want 3d GPS predictions
             maximum_time_steps=2048,
             dropout_rate=0.1,

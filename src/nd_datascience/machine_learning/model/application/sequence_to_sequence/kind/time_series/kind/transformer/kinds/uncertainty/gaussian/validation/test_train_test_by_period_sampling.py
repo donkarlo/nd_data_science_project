@@ -17,19 +17,19 @@ from nd_math.probability.statistic.population.sampling.kind.countable.finite.mem
     SlidingWindow
 from nd_math.probability.statistic.population.sampling.size.kind.ratio import Ratio
 from nd_math.sequence.partitioning.kind.by_length.by_length import ByLength as ByLengthSequencePartitioning
-from nd_robotic_ai.robot.structure.kind.mind.cognition.process.kind.memory.kind.implicit.repetition_priming.kind.event_specific_knowledge_forcasting_model_config.architecture import \
-    Architecture as RepititionPrimingArchitecture
-from nd_robotic_ai.robot.structure.kind.mind.cognition.process.kind.memory.kind.implicit.repetition_priming.kind.event_specific_knowledge_forcasting_model_config.training.config import \
-    Config as RepititionPrimingTrainingConfig
-from nd_sociomind.experiment.kind.oldest.robotic.composite.children.composite.children.uav1.structure.kind.mind.memory.explicit.long_term.episodic.auto_biographical.event_specific_knowledge.normal.sliced_from_1_to_300000.gaussianed_quaternion_kinematic.time_position.time_positions import \
-    TimePositions
+from nd_robotic_ai.robot.parts.mind.parts.cognition.parts.object_level.process.parts.memory.parts.implicit.repetition_priming.kinds.event_specific_knowledge_forcasting_model_config.architecture import Architecture as RepititionPrimingArchitecture
+from nd_robotic_ai.robot.parts.mind.parts.cognition.parts.object_level.process.parts.memory.parts.implicit.repetition_priming.kinds.event_specific_knowledge_forcasting_model_config.training.config import Config as RepititionPrimingTrainingConfig
+from nd_sociomind.experiment.parts.oldest.uav1_300k_normal_time_position_modality import \
+    Uav1300kNormalTimePositionModality
 from nd_utility.data.kind.dic.dic import Dic
 
 
 class TestTrainTestByPeriodSampling:
     def setup_method(self):
-        self._one_period_members_count = 24450 # This can be discovered by autocorellation
-        self._time_positions_composite_memory = TimePositions(slice(0, 10*24450))
+        # This can be discovered by autocorellation
+        self._one_period_members_count = 24450
+        slc = slice(0, 10 * 24450)
+        self._time_positions_composite_memory = Uav1300kNormalTimePositionModality(slc)
 
     def test_plot_mean_euclidean_distance_plot(self):
         positions_sequence = self._time_positions_composite_memory.get_np_positions()

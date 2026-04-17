@@ -3,7 +3,7 @@ import tensorflow as tf
 
 from nd_datascience.machine_learning.model.application.sequence_to_sequence.kind.time_series.kind.transformer.architecture.architecture import \
     Architecture
-from nd_datascience.machine_learning.model.application.sequence_to_sequence.trainer.learned_parameters import LearnedParameters
+from nd_datascience.machine_learning.model.application.sequence_to_sequence.training.learned_parameters import LearnedParameters
 
 
 class Predictor:

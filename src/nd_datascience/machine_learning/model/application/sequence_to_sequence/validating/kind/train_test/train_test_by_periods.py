@@ -1,7 +1,7 @@
 import numpy as np
 
-from nd_datascience.machine_learning.model.application.sequence_to_sequence.predictor.predicting import Predicting
-from nd_datascience.machine_learning.model.application.sequence_to_sequence.trainer.trainer import Trainer
+from nd_datascience.machine_learning.model.application.sequence_to_sequence.predicting.predicting import Predicting
+from nd_datascience.machine_learning.model.application.sequence_to_sequence.training.training import Training
 from nd_datascience.machine_learning.model.architecture.architecture import Architecture
 from nd_datascience.machine_learning.model.supervision.kind.supervion_dependent.training.config import Config
 from nd_math.probability.statistic.population.sampling.kind.countable.finite.members_mentioned.numbered.sequence.sliding_window.generator import \
@@ -55,7 +55,7 @@ class TrainTestByPeriods(Validation):
         point_cloud.render()
 
     @classmethod
-    def init_from_one_split(cls, train_data: np.ndarray, test_data: np.ndarray, trainer_class:Trainer, architecture:Architecture, trainer_configs:Config, predictor_class: Predicting, sliding_window_step)->None:
+    def init_from_one_split(cls, train_data: np.ndarray, test_data: np.ndarray, trainer_class:Training, architecture:Architecture, trainer_configs:Config, predictor_class: Predicting, sliding_window_step)->None:
         #preparing data
         sliding_window_step = sliding_window_step
         sliding_window_length = architecture.get_output_time_steps()
