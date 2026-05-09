@@ -17,8 +17,10 @@ from nd_math.probability.statistic.population.sampling.kind.countable.finite.mem
     SlidingWindow
 from nd_math.probability.statistic.population.sampling.size.kind.ratio import Ratio
 from nd_math.sequence.partitioning.kind.by_length.by_length import ByLength as ByLengthSequencePartitioning
-from nd_robotic_ai.robot.parts.mind.parts.cognition.parts.object_level.process.parts.memory.parts.implicit.repetition_priming.kinds.event_specific_knowledge_forcasting_model_config.architecture import Architecture as RepititionPrimingArchitecture
-from nd_robotic_ai.robot.parts.mind.parts.cognition.parts.object_level.process.parts.memory.parts.implicit.repetition_priming.kinds.event_specific_knowledge_forcasting_model_config.training.config import Config as RepititionPrimingTrainingConfig
+from nd_robotic_ai.robot.parts.mind.parts.cognition.parts.object_level.process.parts.memory.parts.implicit.repetition_priming.kinds.event_specific_knowledge_forcasting_model_config.architecture import \
+    Architecture as RepititionPrimingArchitecture
+from nd_robotic_ai.robot.parts.mind.parts.cognition.parts.object_level.process.parts.memory.parts.implicit.repetition_priming.kinds.event_specific_knowledge_forcasting_model_config.training.config import \
+    Config as RepititionPrimingTrainingConfig
 from nd_sociomind.experiment.parts.oldest.uav1_300k_normal_time_position_modality import \
     Uav1300kNormalTimePositionModality
 from nd_utility.data.kind.dic.dic import Dic
@@ -43,8 +45,8 @@ class TestTrainTestByPeriodSampling:
         training_sequence = np.vstack(random_sampling.get_samples())
         testing_sequence = np.vstack(random_sampling.get_complements())
 
-
-        feature_dimension = training_sequence.shape[1]  # for position without time, it must give three
+        # for position without time, it must give three
+        feature_dimension = training_sequence.shape[1]
         training_sequence_size = training_sequence.shape[0]
 
         model_architecture = RepititionPrimingArchitecture(Dic({
@@ -53,9 +55,6 @@ class TestTrainTestByPeriodSampling:
         trainer_config = RepititionPrimingTrainingConfig(Dic({
             "training_sequence_size": training_sequence_size}
         ))
-
-
-
 
         sliding_window = SlidingWindow(trainer_config.get_config_dic()["input_sequence_size"],
                                        trainer_config.get_config_dic()["output_sequence_size"],
